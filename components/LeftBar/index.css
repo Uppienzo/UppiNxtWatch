@@ -1,0 +1,17 @@
+.link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  padding: 7px 15px;
+  color: #1e293b;
+  font-weight: 400;
+}
+.active {
+  background-color: #f1f5f9;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.active-icon {
+  color: #ff0000;
+}
