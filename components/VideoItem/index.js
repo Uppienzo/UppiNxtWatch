@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom'
 
 import {formatDistanceToNow} from 'date-fns'
 import {BsDot} from 'react-icons/bs'
+import Context from '../../context'
 
 import {
   VideoContainer,
@@ -26,26 +27,37 @@ const VideoItem = props => {
   const now = `${time[1]} years ago`
 
   return (
-    <Link
-      to={`/videos/${id}`}
-      style={{color: 'inherit', textDecoration: 'none'}}
-    >
-      <VideoContainer>
-        <Thumbnail src={thumbnailUrl} alt="video" />
-        <VideoInfo>
-          <ChannelProfile src={profileImageUrl} alt="profile" />
-          <VideoDescription>
-            <Title> {title} </Title>
-            <ChannelName> {name} </ChannelName>
-            <ViewsAndTimeAgo>
-              <Views>{viewCount} Views</Views>
-              <BsDot />
-              <UploadedDate> {now}</UploadedDate>
-            </ViewsAndTimeAgo>
-          </VideoDescription>
-        </VideoInfo>
-      </VideoContainer>
-    </Link>
+    <Context.Consumer>
+      {value => {
+        const {shiftTab, isDark} = value
+        const onTap = () => {
+          shiftTab('NONE')
+        }
+        return (
+          <Link
+            to={`/videos/${id}`}
+            style={{color: 'inherit', textDecoration: 'none'}}
+            onClick={onTap}
+          >
+            <VideoContainer>
+              <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
+              <VideoInfo>
+                <ChannelProfile src={profileImageUrl} alt="channel logo" />
+                <VideoDescription>
+                  <Title isDark={isDark}> {title} </Title>
+                  <ChannelName isDark={isDark}> {name} </ChannelName>
+                  <ViewsAndTimeAgo>
+                    <Views isDark={isDark}>{viewCount} Views</Views>
+                    <BsDot />
+                    <UploadedDate isDark={isDark}> {now}</UploadedDate>
+                  </ViewsAndTimeAgo>
+                </VideoDescription>
+              </VideoInfo>
+            </VideoContainer>
+          </Link>
+        )
+      }}
+    </Context.Consumer>
   )
 }
 

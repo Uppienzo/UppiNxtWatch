@@ -1,9 +1,14 @@
+import {FaGamepad} from 'react-icons/fa'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-import Loader from 'react-loader-spinner'
-import {FaGamepad} from 'react-icons/fa'
+import FailureView from '../AuthenticationFailure'
+import Load from '../Loader'
+import Context from '../../context'
 
 import GamingVideoItem from '../GamingVideoItem'
+
+import Navbar from '../Navbar'
+import LeftBar from '../LeftBar'
 
 import {
   TrendsContainer,
@@ -11,12 +16,8 @@ import {
   Icon,
   TrendingHead,
   TrendingVideosContainer,
-  LoadAnimation,
-  NoVideosContainer,
-  NoVideosImage,
-  NoVideosHeader,
-  NoVideosDescription,
-  RetryButton,
+  HomeContainer,
+  HomeBody,
 } from './styledComponents'
 
 const constantStates = {
@@ -40,7 +41,6 @@ class Games extends Component {
       title: each.title,
       viewCount: each.view_count,
     }))
-    console.log(updatedVideos)
     this.setState({gamingVideos: updatedVideos, state: constantStates.success})
   }
 
@@ -64,35 +64,19 @@ class Games extends Component {
   }
 
   header = () => (
-    <HeadContainer>
-      <Icon>
-        <FaGamepad />
-      </Icon>
-      <TrendingHead>Gaming</TrendingHead>
-    </HeadContainer>
-  )
-
-  loader = () => (
-    <LoadAnimation className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color=" #3b82f6" height="50" width="50" />
-    </LoadAnimation>
-  )
-
-  failureView = () => (
-    <NoVideosContainer>
-      <NoVideosImage
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="failure"
-      />
-      <NoVideosHeader>Oops! Something Went Wrong</NoVideosHeader>
-      <NoVideosDescription>
-        We are having some trouble to complete your request. <br /> Please try
-        again.
-      </NoVideosDescription>
-      <RetryButton type="button" onClick={this.getTrendingVideos}>
-        Retry
-      </RetryButton>
-    </NoVideosContainer>
+    <Context.Consumer>
+      {value => {
+        const {isDark} = value
+        return (
+          <HeadContainer isDark={isDark} data-testid="banner">
+            <Icon isDark={isDark}>
+              <FaGamepad />
+            </Icon>
+            <TrendingHead>Gaming</TrendingHead>
+          </HeadContainer>
+        )
+      }}
+    </Context.Consumer>
   )
 
   trendingVideos = () => {
@@ -110,12 +94,11 @@ class Games extends Component {
     const {state} = this.state
     switch (state) {
       case constantStates.loading:
-        return this.loader()
+        return <Load />
       case constantStates.success:
         return this.trendingVideos()
       case constantStates.failure:
-        return this.failureView()
-
+        return <FailureView retry={this.getGamingVideos} />
       default:
         return null
     }
@@ -123,10 +106,23 @@ class Games extends Component {
 
   render() {
     return (
-      <TrendsContainer>
-        {this.header()}
-        {this.VideosSectionView()}
-      </TrendsContainer>
+      <Context.Consumer>
+        {value => {
+          const {isDark} = value
+          return (
+            <HomeContainer isDark={isDark} data-testid="gaming">
+              <Navbar />
+              <HomeBody>
+                <LeftBar />
+                <TrendsContainer isDark={isDark}>
+                  {this.header()}
+                  {this.VideosSectionView()}
+                </TrendsContainer>
+              </HomeBody>
+            </HomeContainer>
+          )
+        }}
+      </Context.Consumer>
     )
   }
 }

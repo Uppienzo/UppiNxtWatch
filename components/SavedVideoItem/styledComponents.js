@@ -39,7 +39,7 @@ export const ChannelName = styled.p`
 export const Title = styled.p`
   color: ${props => (props.isDark ? ' #f1f1f1' : ' #1e293b')};
   margin-top: 0px;
-  font-size: 17px;
+  font-size: 26px;
   font-weight: bold;
   @media screen and (max-width: 767px) {
     font-size: 14px;
@@ -63,13 +63,6 @@ export const Views = styled.p`
 `
 export const UploadedDate = styled(Views)``
 
-export const ChannelData = styled.div`
-  @media screen and (max-width: 767px) {
-    display: flex;
-    align-items: center;
-    margin-top: auto;
-  }
-`
 export const Dot = styled.div`
   display: none;
   @media screen and (max-width: 767px) {
@@ -80,6 +73,14 @@ export const Dot = styled.div`
     margin: 0px 5px;
   }
 `
+export const ChannelData = styled.div`
+  @media screen and (max-width: 767px) {
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+  }
+`
+
 export const DescriptionContainer = styled.div`
   display: flex;
   width: 100%;

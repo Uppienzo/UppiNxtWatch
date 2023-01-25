@@ -2,8 +2,12 @@ import {Component} from 'react'
 import {IoClose} from 'react-icons/io5'
 import {BiSearchAlt} from 'react-icons/bi'
 import Cookies from 'js-cookie'
-import Loader from 'react-loader-spinner'
 import VideoItem from '../VideoItem'
+import Context from '../../context'
+import LeftBar from '../LeftBar'
+import FailureView from '../AuthenticationFailure'
+import Navbar from '../Navbar'
+import Load from '../Loader'
 
 import {
   MainBarContainer,
@@ -17,12 +21,13 @@ import {
   SearchContainer,
   Search,
   SearchButton,
-  LoadAnimation,
   NoVideosContainer,
   NoVideosImage,
   NoVideosHeader,
   NoVideosDescription,
   RetryButton,
+  HomeContainer,
+  HomeBody,
 } from './styledComponents'
 
 const constantStates = {
@@ -60,33 +65,14 @@ class MainBar extends Component {
     }))
     if (updatedVideos.length === 0) {
       this.setState({videos: updatedVideos, state: constantStates.noVideos})
-      console.log(updatedVideos)
     } else {
       this.setState({videos: updatedVideos, state: constantStates.success})
-      console.log(updatedVideos)
     }
   }
 
   failureFetch = () => {
     this.setState({state: constantStates.failure})
   }
-
-  failureView = () => (
-    <NoVideosContainer>
-      <NoVideosImage
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="failure"
-      />
-      <NoVideosHeader>Oops! Something Went Wrong</NoVideosHeader>
-      <NoVideosDescription>
-        We are having some trouble to complete your request. <br /> Please try
-        again.
-      </NoVideosDescription>
-      <RetryButton type="button" onClick={this.getHomeVideos}>
-        Retry
-      </RetryButton>
-    </NoVideosContainer>
-  )
 
   getHomeVideos = async () => {
     this.setState({state: constantStates.loading})
@@ -112,12 +98,6 @@ class MainBar extends Component {
     this.setState({isBannerDisplayed: false})
   }
 
-  loader = () => (
-    <LoadAnimation className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color=" #3b82f6" height="50" width="50" />
-    </LoadAnimation>
-  )
-
   onChangeSearchInput = event => {
     this.setState({searchInput: event.target.value})
   }
@@ -125,17 +105,29 @@ class MainBar extends Component {
   searchInput = () => {
     const {searchInput} = this.state
     return (
-      <SearchContainer>
-        <Search
-          type="search"
-          placeholder="Search"
-          value={searchInput}
-          onChange={this.onChangeSearchInput}
-        />
-        <SearchButton type="button" onClick={this.getHomeVideos}>
-          <BiSearchAlt />
-        </SearchButton>
-      </SearchContainer>
+      <Context.Consumer>
+        {value => {
+          const {isDark} = value
+          return (
+            <SearchContainer isDark={isDark}>
+              <Search
+                type="search"
+                placeholder="Search"
+                value={searchInput}
+                onChange={this.onChangeSearchInput}
+                isDark={isDark}
+              />
+              <SearchButton
+                type="button"
+                data-testid="searchButton"
+                onClick={this.getHomeVideos}
+              >
+                <BiSearchAlt />
+              </SearchButton>
+            </SearchContainer>
+          )
+        }}
+      </Context.Consumer>
     )
   }
 
@@ -146,7 +138,11 @@ class MainBar extends Component {
           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
           alt="nxt watch logo"
         />
-        <CloseButton type="button" onClick={this.onCloseBanner}>
+        <CloseButton
+          type="button"
+          onClick={this.onCloseBanner}
+          data-testid="close"
+        >
           <IoClose />
         </CloseButton>
       </BannerHead>
@@ -169,30 +165,39 @@ class MainBar extends Component {
   }
 
   noVideosView = () => (
-    <NoVideosContainer>
-      <NoVideosImage
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
-        alt="no videos"
-      />
-      <NoVideosHeader>No Search results found</NoVideosHeader>
-      <NoVideosDescription>
-        Try different key words or remove search filter
-      </NoVideosDescription>
-      <RetryButton type="button" onClick={this.getHomeVideos}>
-        Retry
-      </RetryButton>
-    </NoVideosContainer>
+    <Context.Consumer>
+      {value => {
+        const {isDark} = value
+        const imageUrl = isDark
+          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-dark-theme-img.png'
+          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-not-found-light-theme-img.png'
+        return (
+          <NoVideosContainer>
+            <NoVideosImage src={imageUrl} alt="not found" />
+            <NoVideosHeader isDark={isDark}>
+              No Search results found
+            </NoVideosHeader>
+            <NoVideosDescription>
+              Try different key words or remove search filter
+            </NoVideosDescription>
+            <RetryButton type="button" onClick={this.getHomeVideos}>
+              Retry
+            </RetryButton>
+          </NoVideosContainer>
+        )
+      }}
+    </Context.Consumer>
   )
 
   VideosSectionView = () => {
     const {state} = this.state
     switch (state) {
       case constantStates.loading:
-        return this.loader()
+        return <Load />
       case constantStates.success:
         return this.renderVideos()
       case constantStates.failure:
-        return this.failureView()
+        return <FailureView retry={this.getHomeVideos} />
       case constantStates.noVideos:
         return this.noVideosView()
       default:
@@ -203,11 +208,24 @@ class MainBar extends Component {
   render() {
     const {isBannerDisplayed} = this.state
     return (
-      <MainBarContainer>
-        {isBannerDisplayed && this.banner()}
-        {this.searchInput()}
-        {this.VideosSectionView()}
-      </MainBarContainer>
+      <Context.Consumer>
+        {value => {
+          const {isDark} = value
+          return (
+            <HomeContainer isDark={isDark} data-testid="home">
+              <Navbar />
+              <HomeBody>
+                <LeftBar />
+                <MainBarContainer isDark={isDark}>
+                  {isBannerDisplayed && this.banner()}
+                  {this.searchInput()}
+                  {this.VideosSectionView()}
+                </MainBarContainer>
+              </HomeBody>
+            </HomeContainer>
+          )
+        }}
+      </Context.Consumer>
     )
   }
 }

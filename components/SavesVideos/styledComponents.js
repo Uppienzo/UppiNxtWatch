@@ -13,12 +13,15 @@ export const HomeBody = styled.div`
   display: flex;
 `
 
-export const TrendsContainer = styled.div`
+export const SavedVideosContainer = styled.div`
   min-height: 90vh;
   overflow: auto;
   width: 100%;
-  background-color: ${props => (props.isDark ? '#0f0f0f ' : '  #f9f9f9')};
+  background-color: ${props => (props.isDark ? '#0f0f0f ' : '#f9f9f9')};
   font-family: roboto;
+  @media screen and (max-width: 767px) {
+    min-height: 100vh;
+  }
 `
 
 export const HeadContainer = styled.div`
@@ -56,10 +59,40 @@ export const TrendingHead = styled.h1`
 export const TrendingVideosContainer = styled.ul`
   list-style-type: none;
   padding-left: 0px;
-  display: flex;
-  flex-wrap: wrap;
   @media screen and (max-width: 767px) {
-    padding: 0px;
-    justify-content: center;
+    align-items: center;
+  }
+`
+export const NoSavedVideosContainer = styled.div`
+  font-family: roboto;
+  padding: 50px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+export const NoSavedImage = styled.img`
+  height: 300px;
+  @media screen and (max-width: 767px) {
+    height: 150px;
+  }
+`
+
+export const NoSaveHead = styled.h1`
+  color: ${props => (props.isDark ? ' #f1f1f1' : ' #1e293b')};
+  font-size: 22px;
+  @media screen and (max-width: 767px) {
+    font-size: 17px;
+  }
+`
+
+export const NoSaveDescription = styled.p`
+  font-size: 17px;
+  color: #7e858e;
+  margin: 0px;
+  text-align: center;
+  @media screen and (max-width: 767px) {
+    font-size: 15px;
   }
 `

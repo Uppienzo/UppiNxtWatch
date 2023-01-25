@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
+import Context from '../../context'
 import {
   LoginContainer,
   FormContainer,
@@ -67,42 +68,58 @@ class Login extends Component {
   }
 
   logo = () => (
-    <Logo
-      src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-      alt="logo"
-    />
+    <Context.Consumer>
+      {value => {
+        const {isDark} = value
+        const imageUrl = isDark
+          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
+          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
+        return <Logo src={imageUrl} alt="website logo" />
+      }}
+    </Context.Consumer>
   )
 
   form = () => {
     const {username, password, showPassword, error} = this.state
     const modifiedPassword = showPassword ? 'text' : 'password'
     return (
-      <FormContainer onSubmit={this.onSubmitForm}>
-        <Label>Username</Label>
-        <Input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={this.onChangeUsername}
-        />
-        <Label>Password</Label>
-        <Input
-          type={modifiedPassword}
-          placeholder="Password"
-          value={password}
-          onChange={this.onChangePassword}
-        />
-        <ShowPasswordContainer>
-          <input
-            id="checkbox"
-            type="checkBox"
-            onChange={this.toggleShowPassword}
-          />
-          <ShowPassword htmlFor="checkbox">Show Password</ShowPassword>
-        </ShowPasswordContainer>
-        <Submit type="submit">Login</Submit>
-        {error && this.errorMessage()}
-      </FormContainer>
+      <Context.Consumer>
+        {value => {
+          const {isDark} = value
+          return (
+            <FormContainer onSubmit={this.onSubmitForm}>
+              <Label isDark={isDark}>Username</Label>
+              <Input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={this.onChangeUsername}
+                isDark={isDark}
+              />
+              <Label isDark={isDark}>Password</Label>
+              <Input
+                type={modifiedPassword}
+                placeholder="Password"
+                value={password}
+                onChange={this.onChangePassword}
+                isDark={isDark}
+              />
+              <ShowPasswordContainer>
+                <input
+                  id="checkbox"
+                  type="checkBox"
+                  onChange={this.toggleShowPassword}
+                />
+                <ShowPassword htmlFor="checkbox" isDark={isDark}>
+                  Show Password
+                </ShowPassword>
+              </ShowPasswordContainer>
+              <Submit type="submit">Login</Submit>
+              {error && this.errorMessage()}
+            </FormContainer>
+          )
+        }}
+      </Context.Consumer>
     )
   }
 
@@ -117,12 +134,19 @@ class Login extends Component {
       return <Redirect to="/" />
     }
     return (
-      <LoginContainer>
-        <LoginBox>
-          {this.logo()}
-          {this.form()}
-        </LoginBox>
-      </LoginContainer>
+      <Context.Consumer>
+        {value => {
+          const {isDark} = value
+          return (
+            <LoginContainer isDark={isDark}>
+              <LoginBox isDark={isDark}>
+                {this.logo()}
+                {this.form()}
+              </LoginBox>
+            </LoginContainer>
+          )
+        }}
+      </Context.Consumer>
     )
   }
 }

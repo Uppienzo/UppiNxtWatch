@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const LoginContainer = styled.div`
   height: 100vh;
   width: 100%;
+  background-color: ${props => (props.isDark ? '#313131' : '  #f8fafc')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +14,10 @@ export const LoginContainer = styled.div`
 export const LoginBox = styled.div`
   height: 380px;
   width: 380px;
-  box-shadow: 0px 0px 25px 0px #bfbfbf, 0px 0px 25px 0px #bfbfbf;
+  background-color: ${props => (props.isDark ? 'black' : '#f8fafc ')};
+  box-shadow: 0px 0px 25px 0px
+      ${props => (props.isDark ? 'transparent' : '#bfbfbf')},
+    0px 0px 25px 0px ${props => (props.isDark ? 'transparent' : '#bfbfbf')};
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -40,7 +44,7 @@ export const FormContainer = styled.form`
 `
 
 export const Label = styled.label`
-  color: #616e7c;
+  color: ${props => (props.isDark ? ' #f1f1f1' : ' #1e293b')};
   font-size: 11px;
   font-weight: bold;
   margin: 16px 0px 4px 0px;
@@ -48,6 +52,8 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
+  background: transparent;
+  color: ${props => (props.isDark ? 'white' : 'black')};
   border: 1px solid #cccccc;
   padding: 7px;
   border-radius: 3px;
@@ -59,6 +65,7 @@ export const ShowPasswordContainer = styled.div`
   margin: 8px 0px;
 `
 export const ShowPassword = styled.label`
+  color: ${props => (props.isDark ? ' #f1f1f1' : ' #1e293b')};
   padding: 0px 0px 0px 4px;
   font-size: 13px;
 `

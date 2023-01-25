@@ -19,11 +19,11 @@ import {
   Profile,
 } from './styledComponents'
 
-const TrendingVideoITem = props => {
+const SavedVideoItem = props => {
   const {details} = props
   const {id, thumbnailUrl, channel, title, viewCount, publishedAt} = details
   const {name, profileImageUrl} = channel
-  console.log(details)
+
   const date = formatDistanceToNow(new Date(publishedAt))
 
   const time = date.split(' ')
@@ -69,4 +69,4 @@ const TrendingVideoITem = props => {
   )
 }
 
-export default TrendingVideoITem
+export default SavedVideoItem

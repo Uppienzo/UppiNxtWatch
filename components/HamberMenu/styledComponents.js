@@ -2,15 +2,10 @@ import styled from 'styled-components'
 
 export const LeftBarContainer = styled.div`
   background-color: ${props => (props.isDark ? '#313131' : 'white')};
-  width: 280px;
-  height: 89vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: 767px) {
-    display: none;
-  }
 `
 export const Tab = styled.button`
   background-color: ${props => {

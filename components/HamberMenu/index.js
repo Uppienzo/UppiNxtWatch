@@ -47,7 +47,7 @@ const ConstTabs = [
   },
 ]
 
-const LeftBar = () => (
+const Hamberger = () => (
   <Context.Consumer>
     {value => {
       const {activeBar, shiftTab, isDark} = value
@@ -106,4 +106,4 @@ const LeftBar = () => (
   </Context.Consumer>
 )
 
-export default LeftBar
+export default Hamberger
