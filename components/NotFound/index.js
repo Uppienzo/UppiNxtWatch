@@ -11,9 +11,9 @@ const NotFound = () => (
       return (
         <NotfoundContainer isDark={isDark}>
           <Image src={imageUrl} alt="not-found" />
-          <Header isDark={isDark}>Page NotFound</Header>
+          <Header isDark={isDark}>Page Not Found</Header>
           <Description isDark={isDark}>
-            We are sorry, the page you requested could not be found.
+            we are sorry, the page you requested could not be found.
           </Description>
         </NotfoundContainer>
       )

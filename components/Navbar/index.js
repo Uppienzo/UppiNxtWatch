@@ -30,9 +30,6 @@ import {
 
 const Navbar = props => {
   const {history} = props
-  const goToHome = () => {
-    history.push('/')
-  }
 
   const onLogout = () => {
     Cookies.remove('jwt_token')
@@ -42,7 +39,7 @@ const Navbar = props => {
   return (
     <Context.Consumer>
       {value => {
-        const {shiftTab, isDark, changeTheme} = value
+        const {isDark, changeTheme} = value
 
         const WebsiteLogo = isDark
           ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
@@ -52,10 +49,6 @@ const Navbar = props => {
           changeTheme()
         }
 
-        const onHomeButton = () => {
-          shiftTab('HOME')
-          goToHome()
-        }
         return (
           <NavbarContainer isDark={isDark}>
             <Link to="/">
@@ -102,44 +95,14 @@ const Navbar = props => {
               <Popup
                 modal
                 trigger={
-                  <Logout type="button" isDark={isDark}>
-                    Logout
-                  </Logout>
-                }
-              >
-                {close => (
-                  <>
-                    <LogOutContainer isDark={isDark}>
-                      <Header isDark={isDark}>
-                        Are you sure you want to logout?
-                      </Header>
-                      <Buttons>
-                        <Cancel
-                          isDark={isDark}
-                          type="button"
-                          onClick={() => close()}
-                        >
-                          Cancel
-                        </Cancel>
-                        <Confirm
-                          isDark={isDark}
-                          type="button"
-                          onClick={onLogout}
-                        >
-                          Confirm
-                        </Confirm>
-                      </Buttons>
-                    </LogOutContainer>
-                  </>
-                )}
-              </Popup>
-
-              <Popup
-                modal
-                trigger={
-                  <LogoutSmall type="button" isDark={isDark}>
-                    <FiLogOut />
-                  </LogoutSmall>
+                  <div>
+                    <Logout type="button" isDark={isDark}>
+                      Logout
+                    </Logout>
+                    <LogoutSmall type="button" isDark={isDark}>
+                      <FiLogOut />
+                    </LogoutSmall>
+                  </div>
                 }
               >
                 {close => (
@@ -177,5 +140,3 @@ const Navbar = props => {
 }
 
 export default withRouter(Navbar)
-
-/*    */

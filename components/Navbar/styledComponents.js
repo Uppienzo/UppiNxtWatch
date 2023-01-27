@@ -147,3 +147,13 @@ export const SideBar = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+export const LogOutContainerSmall = styled(LogOutContainer)``
+
+export const HeaderSmall = styled(Header)``
+
+export const ButtonsSmall = styled(Buttons)``
+
+export const CancelSmall = styled(Cancel)``
+
+export const ConfirmSmall = styled(Confirm)``
