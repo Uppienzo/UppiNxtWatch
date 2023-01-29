@@ -1,7 +1,8 @@
 import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import Context from '../../context'
+import Context from '../../Context'
+
 import {
   LoginContainer,
   FormContainer,

@@ -3,19 +3,18 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import FailureView from '../AuthenticationFailure'
 import Load from '../Loader'
-import Context from '../../context'
-
+import Context from '../../Context'
 import GamingVideoItem from '../GamingVideoItem'
 
 import Navbar from '../Navbar'
 import LeftBar from '../LeftBar'
 
 import {
-  TrendsContainer,
+  GamesContainer,
   HeadContainer,
   Icon,
-  TrendingHead,
-  TrendingVideosContainer,
+  GamesHead,
+  GamesVideosContainer,
   HomeContainer,
   HomeBody,
 } from './styledComponents'
@@ -27,7 +26,7 @@ const constantStates = {
   loading: 'LOADING',
 }
 
-class Games extends Component {
+class Gaming extends Component {
   state = {gamingVideos: [], state: constantStates.initial}
 
   componentDidMount() {
@@ -72,7 +71,7 @@ class Games extends Component {
             <Icon isDark={isDark}>
               <FaGamepad />
             </Icon>
-            <TrendingHead>Gaming</TrendingHead>
+            <GamesHead>Gaming</GamesHead>
           </HeadContainer>
         )
       }}
@@ -82,11 +81,11 @@ class Games extends Component {
   trendingVideos = () => {
     const {gamingVideos} = this.state
     return (
-      <TrendingVideosContainer>
+      <GamesVideosContainer>
         {gamingVideos.map(each => (
           <GamingVideoItem key={each.id} details={each} />
         ))}
-      </TrendingVideosContainer>
+      </GamesVideosContainer>
     )
   }
 
@@ -114,10 +113,10 @@ class Games extends Component {
               <Navbar />
               <HomeBody>
                 <LeftBar />
-                <TrendsContainer isDark={isDark}>
+                <GamesContainer isDark={isDark}>
                   {this.header()}
                   {this.VideosSectionView()}
-                </TrendsContainer>
+                </GamesContainer>
               </HomeBody>
             </HomeContainer>
           )
@@ -127,4 +126,4 @@ class Games extends Component {
   }
 }
 
-export default Games
+export default Gaming

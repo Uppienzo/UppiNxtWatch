@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom'
 import {formatDistanceToNow} from 'date-fns'
 import {BsDot} from 'react-icons/bs'
 
-import Context from '../../context'
+import Context from '../../Context'
+
 import {
   TrendingVideoItem,
   Thumbnial,

@@ -5,7 +5,7 @@ import './index.css'
 
 import {Link} from 'react-router-dom'
 import {FaGamepad} from 'react-icons/fa'
-import Context from '../../context'
+import Context from '../../Context'
 
 import {
   LeftBarContainer,

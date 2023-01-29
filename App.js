@@ -6,11 +6,11 @@ import Home from './components/Home'
 import Login from './components/Login'
 import ProtectedRoute from './components/ProtectedRoute'
 import Trending from './components/Trending'
-import Games from './components/Games'
+import Gaming from './components/Games'
 import NotFound from './components/NotFound'
-import Video from './components/Videos'
+import VideoItemDetails from './components/Videos'
 import SavedVideos from './components/SavesVideos'
-import Context from './context'
+import Context from './Context'
 
 class App extends Component {
   state = {
@@ -59,11 +59,15 @@ class App extends Component {
           <Route exact path="/login" component={Login} />
           <ProtectedRoute exact path="/" component={Home} />
           <ProtectedRoute exact path="/trending" component={Trending} />
-          <ProtectedRoute exact path="/games" component={Games} />
-          <ProtectedRoute exact path="/videos/:id" component={Video} />
+          <ProtectedRoute exact path="/gaming" component={Gaming} />
+          <ProtectedRoute
+            exact
+            path="/videos/:id"
+            component={VideoItemDetails}
+          />
           <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
-          <Route path="not-found" component={NotFound} />
-          <Redirect to="not-found" />
+          <ProtectedRoute exact path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
         </Switch>
       </Context.Provider>
     )

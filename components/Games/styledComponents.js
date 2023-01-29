@@ -13,7 +13,7 @@ export const HomeBody = styled.div`
   display: flex;
 `
 
-export const TrendsContainer = styled.div`
+export const GamesContainer = styled.div`
   min-height: 90vh;
   overflow: auto;
   width: 100%;
@@ -47,17 +47,18 @@ export const Icon = styled.div`
     margin: 8px;
   }
 `
-export const TrendingHead = styled.h1`
+export const GamesHead = styled.h1`
   @media screen and (max-width: 767px) {
     font-size: 23px;
   }
 `
 
-export const TrendingVideosContainer = styled.ul`
+export const GamesVideosContainer = styled.ul`
   list-style-type: none;
   padding-left: 0px;
   display: flex;
   flex-wrap: wrap;
+
   @media screen and (max-width: 767px) {
     padding: 0px;
     justify-content: center;

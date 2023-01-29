@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 
 import {GameCardItem, Thumbnail, GameTitle, Views} from './styledComponents'
-import Context from '../../context'
+import Context from '../../Context'
 
 const GamingVideoItem = props => {
   const {details} = props

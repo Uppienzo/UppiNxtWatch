@@ -17,7 +17,7 @@ import {
   HomeContainer,
   HomeBody,
 } from './styledComponents'
-import Context from '../../context'
+import Context from '../../Context'
 
 const SavedVideos = () => {
   const header = () => (

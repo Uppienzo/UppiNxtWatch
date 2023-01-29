@@ -1,5 +1,5 @@
 import {NotfoundContainer, Image, Description, Header} from './styledComponents'
-import Context from '../../context'
+import Context from '../../Context'
 
 const NotFound = () => (
   <Context.Consumer>

@@ -8,7 +8,8 @@ import {FiSun, FiLogOut} from 'react-icons/fi'
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {IoCloseSharp} from 'react-icons/io5'
 import Hamberger from '../HamberMenu'
-import Context from '../../context'
+import Context from '../../Context'
+
 import {
   NavbarContainer,
   Logo,

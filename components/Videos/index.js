@@ -7,7 +7,7 @@ import ReactPlayer from 'react-player'
 
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-import Context from '../../context'
+import Context from '../../Context'
 import Load from '../Loader'
 import FailureView from '../AuthenticationFailure'
 
@@ -45,7 +45,7 @@ const constantStates = {
   loading: 'LOADING',
 }
 
-class Video extends Component {
+class VideoItemDetails extends Component {
   state = {
     video: '',
     state: constantStates.initial,
@@ -101,8 +101,6 @@ class Video extends Component {
 
   videoContent = () => {
     const {video, isLikeActive, isDislikeActive} = this.state
-
-    console.log(isLikeActive, isDislikeActive)
     const {
       channel,
       description,
@@ -270,4 +268,4 @@ class Video extends Component {
   }
 }
 
-export default Video
+export default VideoItemDetails

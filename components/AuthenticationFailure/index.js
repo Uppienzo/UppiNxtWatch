@@ -1,12 +1,12 @@
 import {
-  NoVideosContainer,
-  NoVideosImage,
-  NoVideosHeader,
-  NoVideosDescription,
-  RetryButton,
+  FailureVideosContainer,
+  FailureVideoImage,
+  FailureVideoHeader,
+  FailureVideoDescription,
+  FailureRetryButton,
 } from './styledComponents'
 
-import Context from '../../context'
+import Context from '../../Context'
 
 const FailureView = props => {
   const {retry} = props
@@ -23,19 +23,19 @@ const FailureView = props => {
           ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
           : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
         return (
-          <NoVideosContainer>
-            <NoVideosImage src={image} alt="failure view" />
-            <NoVideosHeader isDark={isDark}>
+          <FailureVideosContainer>
+            <FailureVideoImage src={image} alt="failure view" />
+            <FailureVideoHeader isDark={isDark}>
               Oops! Something Went Wrong
-            </NoVideosHeader>
-            <NoVideosDescription>
+            </FailureVideoHeader>
+            <FailureVideoDescription>
               We are having some trouble to complete your request. Please try
               again.
-            </NoVideosDescription>
-            <RetryButton type="button" onClick={onRetry}>
+            </FailureVideoDescription>
+            <FailureRetryButton type="button" onClick={onRetry}>
               Retry
-            </RetryButton>
-          </NoVideosContainer>
+            </FailureRetryButton>
+          </FailureVideosContainer>
         )
       }}
     </Context.Consumer>

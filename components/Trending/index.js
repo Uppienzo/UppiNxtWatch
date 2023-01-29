@@ -6,7 +6,8 @@ import FailureView from '../AuthenticationFailure'
 import Load from '../Loader'
 
 import TrendingVideoItem from '../TrendingVideoItem'
-import Context from '../../context'
+import Context from '../../Context'
+
 import Navbar from '../Navbar'
 import LeftBar from '../LeftBar'
 

@@ -11,6 +11,7 @@ export const NotfoundContainer = styled.div`
   font-family: roboto;
   @media screen and (max-width: 767px) {
     padding: 19px;
+    padding-top: 70px;
   }
 `
 export const Image = styled.img`

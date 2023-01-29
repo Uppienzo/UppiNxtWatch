@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const NoVideosContainer = styled.div`
+export const FailureVideosContainer = styled.div`
   font-family: roboto;
   padding: 50px 0px;
   display: flex;
@@ -11,13 +11,13 @@ export const NoVideosContainer = styled.div`
     padding: 20px;
   }
 `
-export const NoVideosImage = styled.img`
+export const FailureVideoImage = styled.img`
   height: 300px;
   @media screen and (max-width: 767px) {
     height: 170px;
   }
 `
-export const NoVideosHeader = styled.h1`
+export const FailureVideoHeader = styled.h1`
   color: ${props => (props.isDark ? '#f1f5f9' : 'black')};
 
   font-size: 22px;
@@ -25,7 +25,7 @@ export const NoVideosHeader = styled.h1`
     font-size: 17px;
   }
 `
-export const NoVideosDescription = styled.p`
+export const FailureVideoDescription = styled.p`
   font-size: 17px;
   color: #7e858e;
   margin: 0px;
@@ -34,7 +34,7 @@ export const NoVideosDescription = styled.p`
     font-size: 14px;
   }
 `
-export const RetryButton = styled.button`
+export const FailureRetryButton = styled.button`
   background-color: #4f46e5;
   color: white;
   padding: 7px 18px;
